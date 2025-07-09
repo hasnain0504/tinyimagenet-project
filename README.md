@@ -2,6 +2,14 @@ Tiny ImageNet - Multi-Model Evaluation Project
 
 This project performs image classification on the Tiny ImageNet dataset using multiple deep learning architectures including ResNet50, EfficientNetB0, EfficientNetB3, MobileNet Multiple Few Shot Learning approaches too, and then it saves all the results for comparison.
 
+📦 Pretrained Models
+
+The trained model weights are too large for GitHub (exceed 100MB).  
+You can download them from [Google Drive](https://drive.google.com/file/d/1tlJHGTNRsyjOq4ZuUS70WCirN7krtlDT/view?usp=sharing).
+
+After downloading:
+- Unzip the `saved_models.zip` into the project root
+
 📁 Dataset
 
 Source: Tiny ImageNet - Kaggle Dataset
