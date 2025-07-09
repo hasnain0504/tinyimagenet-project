@@ -1,0 +1,26 @@
+{
+    "resnet50": {
+        "loss": 2.000321388244629,
+        "accuracy": 0.5271999835968018
+    },
+    "mobilenet": {
+        "loss": 2.2361016273498535,
+        "accuracy": 0.46239998936653137
+    },
+    "efficientnetb3": {
+        "loss": 2.2405407428741455,
+        "accuracy": 0.4675999879837036
+    },
+    "few_shot": {
+        "accuracy": 0.3128
+    },
+    "prototypical_network": {
+        "accuracy": 0.4336
+    },
+    "siamese_model": {
+        "accuracy": 0.0
+    },
+    "maml": {
+        "accuracy": 0.6013333487510681
+    }
+}

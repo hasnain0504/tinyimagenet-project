@@ -1,0 +1,16 @@
+# Ignore backup folder with dataset and test codes
+backup/
+
+# Ignore system & editor-specific files
+__pycache__/
+.DS_Store
+.vscode/
+
+# Optional: Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore temporary/large files (adjust based on what you want to keep)
+*.zip
+*.pdf
+*.docx
+*.pptx
