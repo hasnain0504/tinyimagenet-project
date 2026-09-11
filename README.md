@@ -1,38 +1,70 @@
 # Tiny ImageNet: Multi-Model & Few-Shot Learning Evaluation
 
-This project investigates image classification on the Tiny ImageNet dataset using multiple deep learning architectures and few-shot / meta-learning approaches.
+This project investigates multiclass image classification and few-shot learning on the Tiny ImageNet dataset using transfer learning and meta-learning approaches.
 
 The central research question is:
 
-> Can meta-learning improve image classification performance in a limited-data setting compared with standard transfer-learning baselines?
+> Can meta-learning improve image classification performance under limited-data conditions compared with conventional transfer-learning baselines?
 
-The project compares supervised CNN baselines with meta-learning methods and includes quantitative evaluation, confusion-matrix analysis, class-level error analysis, representation visualization, and saved experimental artifacts.
+The project evaluates multiple CNN architectures, including ResNet-50, MobileNet, EfficientNetB0, and EfficientNetB3, and integrates Model-Agnostic Meta-Learning (MAML) for few-shot classification.
 
 ---
 
 ## Key Result
 
-In the evaluated low-data setting:
+Under the evaluated low-data setting:
 
-- **Fine-tuned ResNet-50 baseline:** 52.1%
-- **MAML meta-learning accuracy:** 67.5%
-- **Improvement:** +15.4 percentage points
+- **Fine-tuned ResNet-50 baseline:** ~53%
+- **MAML few-shot accuracy:** ~67%
+- **Absolute improvement:** ~15 percentage points
 
-The project also includes confusion matrices, t-SNE visualizations, class-level analysis, and comparative evaluation across multiple architectures.
+The experiments demonstrate that meta-learning can provide substantial benefits when labeled data is limited, while fully fine-tuned models remain competitive when more training data is available.
 
 ---
 
-## Models Evaluated
+## Project Resources
 
-### Supervised / Transfer Learning
-- ResNet-50
-- EfficientNetB0
-- EfficientNetB3
-- MobileNet
+- **Full Project Page:**  
+  [View methodology, results, and visual analysis](https://hasnainsomani.vercel.app/projects/multiclass-object-detection)
 
-### Few-Shot / Meta-Learning
-- Model-Agnostic Meta-Learning (MAML)
-- Additional few-shot learning experiments implemented during the project
+- **GitHub Repository:**  
+  [tinyimagenet-project](https://github.com/hasnain0504/tinyimagenet-project)
+
+- **Pretrained Model Weights:**  
+  [Download from Google Drive](https://drive.google.com/file/d/1tlJHGTNRsyjOq4ZuUS70WCirN7krtlDT/view?usp=sharing)
+
+- **Technical Article:**  
+  https://medium.com/@hasnain.somani2/transfer-learning-few-shot-on-imagenet-b01a112e6573?sharedUserId=hasnain.somani2
+
+---
+
+## Technical Highlights
+
+- Trained multiclass image-classification models using ResNet-50, MobileNet, EfficientNetB0, and EfficientNetB3.
+- Evaluated frozen, partially fine-tuned, and fully fine-tuned transfer-learning configurations.
+- Integrated **Model-Agnostic Meta-Learning (MAML)** for few-shot classification under limited-data conditions.
+- Performed hyperparameter experimentation across learning rates, optimizers, dropout configurations, and dense layers.
+- Built modular training and evaluation workflows with reusable metrics and saved experiment artifacts.
+- Conducted confusion-matrix analysis and model-level performance comparison.
+- Used **t-SNE visualization** to inspect learned feature representations and class separability.
+- Compared conventional transfer learning with meta-learning under different data regimes.
+
+---
+
+## Visual Analysis
+
+The full project page contains detailed plots and discussion, including:
+
+- Training vs. validation accuracy
+- Training vs. validation loss
+- Model-wise performance comparison
+- Few-shot baseline vs. MAML comparison
+- MAML training progression
+- t-SNE visualization of learned embeddings
+
+View all results here:
+
+[Full Results and Visualizations](https://hasnainsomani.vercel.app/projects/multiclass-object-detection)
 
 ---
 
@@ -43,9 +75,9 @@ The project also includes confusion matrices, t-SNE visualizations, class-level 
 - 200 classes
 - 64 × 64 RGB images
 - Separate training and validation sets
-- Multi-class visual recognition benchmark
+- Multi-class image-recognition benchmark
 
-Source: Tiny ImageNet via Kaggle
+Dataset source: Tiny ImageNet via Kaggle.
 
 The `data_loader.py` script downloads, extracts, preprocesses, and reorganizes the validation data into class-wise directories.
 
@@ -53,28 +85,14 @@ The `data_loader.py` script downloads, extracts, preprocesses, and reorganizes t
 
 ## Research Workflow
 
-1. Established supervised CNN baselines using transfer learning.
-2. Compared multiple pretrained architectures under a common evaluation setup.
-3. Implemented few-shot / meta-learning experiments for limited-data classification.
-4. Evaluated model performance quantitatively across model variants.
-5. Performed class-level error analysis using confusion matrices.
-6. Visualized learned representations using t-SNE.
-7. Saved model weights, training metrics, feature vectors, and evaluation outputs for reproducibility.
-
----
-
-## Pretrained Models
-
-The trained model weights exceed GitHub's file-size limit.
-
-You can download them here:
-
-[Download saved model weights from Google Drive](https://drive.google.com/file/d/1tlJHGTNRsyjOq4ZuUS70WCirN7krtlDT/view?usp=sharing)
-
-After downloading:
-
-- Unzip `saved_models.zip`
-- Place the extracted `saved_models/` directory in the project root
+1. Established transfer-learning baselines using pretrained CNN architectures.
+2. Compared frozen, partially fine-tuned, and fully fine-tuned configurations.
+3. Evaluated architecture-level performance across multiple CNN families.
+4. Implemented MAML for few-shot classification under limited-data conditions.
+5. Compared few-shot performance against conventional fine-tuned baselines.
+6. Conducted class-level error analysis and confusion-matrix evaluation.
+7. Visualized learned feature representations using t-SNE.
+8. Saved training metrics, model weights, feature vectors, and evaluation outputs for reproducibility.
 
 ---
 
@@ -91,9 +109,24 @@ After downloading:
     effnetb0_training_metrics.json   # EfficientNetB0 training history
     resnet50_adam_full_metrics.json  # ResNet50 training history
     effnetb0_weights.h5              # EfficientNetB0 saved weights
-    README.md                        # Project documentation
     requirements.txt                 # Python dependencies
+    README.md                        # Project documentation
     .gitignore                       # Git ignore rules
+
+---
+
+## Pretrained Models
+
+Some trained model files exceed GitHub's file-size limit.
+
+Download them here:
+
+[Download saved model weights](https://drive.google.com/file/d/1tlJHGTNRsyjOq4ZuUS70WCirN7krtlDT/view?usp=sharing)
+
+After downloading:
+
+- Unzip `saved_models.zip`
+- Place the extracted `saved_models/` directory in the project root
 
 ---
 
@@ -110,13 +143,12 @@ After downloading:
     conda activate tfgpu_clean
     pip install -r requirements.txt
 
-### 3. Add Kaggle API Token
+### 3. Configure Kaggle Access
 
-- Go to Kaggle
-- Download your `kaggle.json` API token
-- Place it in the required Kaggle credentials location for your system
+- Download your `kaggle.json` API token from Kaggle
+- Place it in the appropriate Kaggle credentials location for your system
 
-### 4. Run the Data Loader
+### 4. Download and Preprocess the Dataset
 
     python data_loader.py
 
@@ -126,47 +158,22 @@ Open:
 
     ML_ImageNet_Project.ipynb
 
-The notebook contains the main training, evaluation, visualization, and model-comparison workflow.
+The notebook contains the primary training, evaluation, model-comparison, and visualization workflow.
 
 ---
 
 ## Evaluation Artifacts
 
-The project includes:
+The repository contains:
 
-- Model comparison metrics
-- Training and validation accuracy histories
+- Model-comparison metrics
+- Training and validation histories
 - Confusion matrices
 - Class-level error analysis
 - t-SNE representation visualizations
-- Comparative model plots
 - Saved query feature vectors
-- Saved model weights
-- JSON-based evaluation outputs
-
-These artifacts support comparison across architectures and learning approaches.
-
----
-
-## Visual Outputs
-
-The evaluation workflow produces:
-
-- Model comparison bar charts
-- Training / validation curves
-- Confusion matrices
-- t-SNE visualizations
-- Additional comparative evaluation plots
-
----
-
-## Project Motivation
-
-This project was designed as a comparative investigation rather than a single-model image-classification exercise.
-
-The supervised models establish strong reference baselines, while the few-shot and meta-learning experiments explore whether alternative learning strategies can improve generalization when labeled training data is limited.
-
-The broader motivation is to study **data-efficient visual learning** and understand how different model families behave under constrained-data conditions.
+- JSON evaluation outputs
+- Trained model weights
 
 ---
 
@@ -188,18 +195,10 @@ The broader motivation is to study **data-efficient visual learning** and unders
 
 ---
 
-## Notes
-
-- Default image size: 64 × 64
-- Training metrics are saved as `.json` files for later analysis
-- Large trained model files are hosted externally due to GitHub file-size limits
-- Additional experimental files are retained in the repository for reproducibility and comparison
-
----
-
 ## Author
 
 **Hasnain Somani**  
 M.S. Data Science, University of Texas at Arlington
 
-GitHub: [hasnain0504](https://github.com/hasnain0504)
+- [Portfolio](https://hasnainsomani.vercel.app)
+- [GitHub](https://github.com/hasnain0504)
