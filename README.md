@@ -34,7 +34,7 @@ The experiments demonstrate that meta-learning can provide substantial benefits 
   [Download from Google Drive](https://drive.google.com/file/d/1tlJHGTNRsyjOq4ZuUS70WCirN7krtlDT/view?usp=sharing)
 
 - **Technical Article:**  
-  https://medium.com/@hasnain.somani2/transfer-learning-few-shot-on-imagenet-b01a112e6573?sharedUserId=hasnain.somani2
+  [View Technical Article](https://medium.com/@hasnain.somani2/transfer-learning-few-shot-on-imagenet-b01a112e6573?sharedUserId=hasnain.somani2)
 
 ---
 
