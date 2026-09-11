@@ -1,99 +1,205 @@
-Tiny ImageNet - Multi-Model Evaluation Project
+# Tiny ImageNet: Multi-Model & Few-Shot Learning Evaluation
 
-This project performs image classification on the Tiny ImageNet dataset using multiple deep learning architectures including ResNet50, EfficientNetB0, EfficientNetB3, MobileNet Multiple Few Shot Learning approaches too, and then it saves all the results for comparison.
+This project investigates image classification on the Tiny ImageNet dataset using multiple deep learning architectures and few-shot / meta-learning approaches.
 
-📦 Pretrained Models
+The central research question is:
 
-The trained model weights are too large for GitHub (exceed 100MB).  
-You can download them from [Google Drive](https://drive.google.com/file/d/1tlJHGTNRsyjOq4ZuUS70WCirN7krtlDT/view?usp=sharing).
+> Can meta-learning improve image classification performance in a limited-data setting compared with standard transfer-learning baselines?
+
+The project compares supervised CNN baselines with meta-learning methods and includes quantitative evaluation, confusion-matrix analysis, class-level error analysis, representation visualization, and saved experimental artifacts.
+
+---
+
+## Key Result
+
+In the evaluated low-data setting:
+
+- **Fine-tuned ResNet-50 baseline:** 52.1%
+- **MAML meta-learning accuracy:** 67.5%
+- **Improvement:** +15.4 percentage points
+
+The project also includes confusion matrices, t-SNE visualizations, class-level analysis, and comparative evaluation across multiple architectures.
+
+---
+
+## Models Evaluated
+
+### Supervised / Transfer Learning
+- ResNet-50
+- EfficientNetB0
+- EfficientNetB3
+- MobileNet
+
+### Few-Shot / Meta-Learning
+- Model-Agnostic Meta-Learning (MAML)
+- Additional few-shot learning experiments implemented during the project
+
+---
+
+## Dataset
+
+**Tiny ImageNet**
+
+- 200 classes
+- 64 × 64 RGB images
+- Separate training and validation sets
+- Multi-class visual recognition benchmark
+
+Source: Tiny ImageNet via Kaggle
+
+The `data_loader.py` script downloads, extracts, preprocesses, and reorganizes the validation data into class-wise directories.
+
+---
+
+## Research Workflow
+
+1. Established supervised CNN baselines using transfer learning.
+2. Compared multiple pretrained architectures under a common evaluation setup.
+3. Implemented few-shot / meta-learning experiments for limited-data classification.
+4. Evaluated model performance quantitatively across model variants.
+5. Performed class-level error analysis using confusion matrices.
+6. Visualized learned representations using t-SNE.
+7. Saved model weights, training metrics, feature vectors, and evaluation outputs for reproducibility.
+
+---
+
+## Pretrained Models
+
+The trained model weights exceed GitHub's file-size limit.
+
+You can download them here:
+
+[Download saved model weights from Google Drive](https://drive.google.com/file/d/1tlJHGTNRsyjOq4ZuUS70WCirN7krtlDT/view?usp=sharing)
 
 After downloading:
-- Unzip the `saved_models.zip` into the project root
 
-📁 Dataset
+- Unzip `saved_models.zip`
+- Place the extracted `saved_models/` directory in the project root
 
-Source: Tiny ImageNet - Kaggle Dataset
+---
 
-The dataset contains:
+## Project Structure
 
-200 classes
+    saved_models/                    # Trained model weights
+    backup/                          # Experimental / unused code
+    features/                        # Precomputed feature representations
+    all_query_features.npy           # Saved query feature vectors
+    all_query_labels.npy             # Saved query labels
+    data_loader.py                   # Dataset download and preprocessing
+    ML_ImageNet_Project.ipynb        # Main training, evaluation, and visualization notebook
+    evaluation_results.json          # Comparative model results
+    effnetb0_training_metrics.json   # EfficientNetB0 training history
+    resnet50_adam_full_metrics.json  # ResNet50 training history
+    effnetb0_weights.h5              # EfficientNetB0 saved weights
+    README.md                        # Project documentation
+    requirements.txt                 # Python dependencies
+    .gitignore                       # Git ignore rules
 
-64x64 color images
+---
 
-Separate train and validation folders
+## Getting Started
 
-Use the data_loader.py script to download, unzip, and preprocess the dataset (class-wise organization of validation data).
+### 1. Clone the Repository
 
-📦 Project Structure
+    git clone https://github.com/hasnain0504/tinyimagenet-project.git
+    cd tinyimagenet-project
 
-├── saved_models/                  # Contains all .h5 saved model weights
-├── backup/                        # Ignored: test code, datasets, and unused experiments
-├── features/                      # Precomputed feature vectors (optional storage)
-├── all_query_features.npy         # Saved query feature vectors
-├── all_query_labels.npy           # Saved query labels
-├── data_loader.py                # Script to download & preprocess Tiny ImageNet from Kaggle
-├── ML_ImageNet_Project.ipynb     # Main notebook for training, evaluation & visualization
-├── evaluation_results.json        # Model comparison results (used in visualization block)
-├── effnetb0_training_metrics.json # Training history for EfficientNetB0
-├── resnet50_adam_full_metrics.json # Training history for ResNet50
-├── effnetb0_weights.h5           # Saved weights for EfficientNetB0 
-├── README.md                     # Project documentation
-├── requirements.txt              # Required dependencies
-├── .gitignore                    # Git ignore rules
+### 2. Set Up the Environment
 
+    conda create -n tfgpu_clean python=3.10
+    conda activate tfgpu_clean
+    pip install -r requirements.txt
 
-🚀 Getting Started
+### 3. Add Kaggle API Token
 
-1. Clone the Repository
+- Go to Kaggle
+- Download your `kaggle.json` API token
+- Place it in the required Kaggle credentials location for your system
 
-git clone https://github.com/hasnain0504/tinyimagenet-project.git
-cd tinyimagenet-project
+### 4. Run the Data Loader
 
-2. Set Up Environment
+    python data_loader.py
 
-conda create -n tfgpu_clean python=3.10
-conda activate tfgpu_clean
-pip install -r requirements.txt
+### 5. Run the Main Notebook
 
-3. Add Kaggle API Token
+Open:
 
-Go to Kaggle
+    ML_ImageNet_Project.ipynb
 
-Download your kaggle.json API token
+The notebook contains the main training, evaluation, visualization, and model-comparison workflow.
 
-Place it in the project root directory
+---
 
-4. Run Data Loader
+## Evaluation Artifacts
 
-python data_loader.py
+The project includes:
 
-🧠 Train or Load Models
+- Model comparison metrics
+- Training and validation accuracy histories
+- Confusion matrices
+- Class-level error analysis
+- t-SNE representation visualizations
+- Comparative model plots
+- Saved query feature vectors
+- Saved model weights
+- JSON-based evaluation outputs
 
-Each model can be loaded or trained from scratch. .h5 files (saved models / weights) are present in the project folder.
+These artifacts support comparison across architectures and learning approaches.
 
-📊 Final Evaluation
+---
 
-Visualization Block in ML_ImageNet_Project.ipynb
+## Visual Outputs
 
-Outputs a bar graph, and multiple other comparision visuals.
+The evaluation workflow produces:
 
-🖼️ Visual Outputs
+- Model comparison bar charts
+- Training / validation curves
+- Confusion matrices
+- t-SNE visualizations
+- Additional comparative evaluation plots
 
-Evaluation script saves and displays:
+---
 
-Model comparison bar graph
+## Project Motivation
 
-Sample logs with training/validation accuracy
+This project was designed as a comparative investigation rather than a single-model image-classification exercise.
 
-You can also generate individual training curves from the metrics .json files.
+The supervised models establish strong reference baselines, while the few-shot and meta-learning experiments explore whether alternative learning strategies can improve generalization when labeled training data is limited.
 
-📝 Notes
+The broader motivation is to study **data-efficient visual learning** and understand how different model families behave under constrained-data conditions.
 
-Default image size is 64x64 as per dataset
+---
 
-All training metrics are saved as .json files for further analysis
+## Technologies
 
-✨ Author
+- Python
+- TensorFlow / Keras
+- PyTorch
+- scikit-learn
+- NumPy
+- Matplotlib
+- Transfer Learning
+- Few-Shot Learning
+- Meta-Learning
+- MAML
+- t-SNE
+- Confusion-Matrix Analysis
+- Tiny ImageNet
 
-Hasnain Somani — 2025
-Feel free to connect or give feedback!
+---
+
+## Notes
+
+- Default image size: 64 × 64
+- Training metrics are saved as `.json` files for later analysis
+- Large trained model files are hosted externally due to GitHub file-size limits
+- Additional experimental files are retained in the repository for reproducibility and comparison
+
+---
+
+## Author
+
+**Hasnain Somani**  
+M.S. Data Science, University of Texas at Arlington
+
+GitHub: [hasnain0504](https://github.com/hasnain0504)
